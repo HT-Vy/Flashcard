@@ -5,11 +5,11 @@ import lombok.*;
 @Getter
 @Setter
 public class UserDTO {
-    private String userName;
+    private String fullName;
     private String email;
 
-    public UserDTO(String userName, String email) {
-        this.userName = userName;
+    public UserDTO(String fullName, String email) {
+        this.fullName = fullName;
         this.email = email;
     }
 

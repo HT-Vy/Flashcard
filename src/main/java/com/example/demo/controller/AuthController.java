@@ -46,7 +46,7 @@ public class AuthController {
         }
 
         User savedUser = userService.registerUser(user);
-        return ResponseEntity.ok(new UserDTO(savedUser.getUserName(), savedUser.getEmail()));
+        return ResponseEntity.ok(new UserDTO(savedUser.getFullName(), savedUser.getEmail()));
     }
 
     // ----- Đăng nhập -----

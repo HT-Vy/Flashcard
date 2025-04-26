@@ -33,7 +33,7 @@ public class SecurityConfig {
         http
             .csrf(csrf -> csrf.disable())
             .authorizeHttpRequests(auth -> auth
-                .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers("/api/auth/register", "/api/auth/login").permitAll() // Cấu hình đúng đường dẫn đăng ký và đăng nhập
 
                 // Cho phép GET mọi người đều có thể xem các bộ FlashcardSet công khai
                 .requestMatchers(HttpMethod.GET, "/api/flashcardsets/**").permitAll()
@@ -43,7 +43,13 @@ public class SecurityConfig {
                 .requestMatchers(HttpMethod.PUT, "/api/flashcardsets/**").authenticated()
                 .requestMatchers(HttpMethod.DELETE, "/api/flashcardsets/**").authenticated()
 
-                // Mặc định các request khác cũng cần xác thực
+                // Cho phép truy cập các file tĩnh: css, js, hình ảnh...
+                .requestMatchers(
+                    "/assets/**", "/css/**", "/js/**", "/images/**", 
+                    "/pages/**", "/favicon.ico", "/**/*.html", "/**/*.js", "/**/*.css"
+                ).permitAll()
+
+                // Mặc định các request khác yêu cầu phải xác thực
                 .anyRequest().authenticated()
             )
             .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
